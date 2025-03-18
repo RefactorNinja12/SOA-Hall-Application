@@ -1,5 +1,6 @@
 ﻿using Hall_App.Models;
 using System;
+using System.Text;
 using System.Text.Json;
 using static System.Net.WebRequestMethods;
 
@@ -29,7 +30,7 @@ namespace Hall_App.Service
 
 
         }
-        public async Task<List<ArcadeHall>?> GetAll()
+        public async Task<List<ArcadeHall>?> GetAllArcadeHalls()
         {
             List<ArcadeHall>? arcadeHalls = await GetAllFromApi<ArcadeHall>("https://localhost:7234/api/ArcadeHall");
 
@@ -54,10 +55,24 @@ namespace Hall_App.Service
 
             return JsonSerializer.Deserialize<T>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
-        public async Task<ArcadeHall?> GetById(int id)
+        public async Task<ArcadeHall?> GetArcadeHallById(int id)
         {
             ArcadeHall? arcadeHall = await GetApiById<ArcadeHall>(id);
             return arcadeHall;
+        }
+        public async Task<bool> CreatebyApi<T>(string endpoint, T dataObject)
+        {
+            string json = JsonSerializer.Serialize(dataObject);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await _httpClient.PostAsync(endpoint, content);
+            return response.IsSuccessStatusCode;
+        }
+        public async Task<bool> UpdateByApi<T>(string endpoint, T dataObject, int id)
+        {
+            string json = JsonSerializer.Serialize(dataObject);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage respone = await _httpClient.PutAsync($"{endpoint}{id}", content);
+            return respone.IsSuccessStatusCode;
         }
 
     }

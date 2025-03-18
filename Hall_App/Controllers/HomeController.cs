@@ -14,14 +14,29 @@ namespace Hall_App.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            ArcadeHall arcadeHall = await _apiService.GetById(1);
-            var isDelete = await _apiService.DeleteById("https://localhost:7234/api/ArcadeHall/", 2);
+            
+            
             return View();
         }
 
         public async Task<IActionResult> Arcadehalls()
         {
-            var isDelete = await _apiService.DeleteById("https://localhost:7234/api/ArcadeHall/", 2);
+            ArcadeHall arcadeHall = new ArcadeHall()
+            {
+                Genre = "IT takes 2",
+                Name = "Shoooter hall",
+                ImageUrl = "Example of something",
+                Id = 3
+            };
+            bool isUpdated = await _apiService.UpdateByApi("https://localhost:7234/api/ArcadeHall/", arcadeHall, arcadeHall.Id);
+            if (isUpdated)
+            {
+                Console.WriteLine("Updatering succeed");
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong");
+            }
             return View();
         }
 
