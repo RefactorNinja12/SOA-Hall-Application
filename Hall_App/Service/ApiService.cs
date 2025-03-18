@@ -36,6 +36,11 @@ namespace Hall_App.Service
 
             return arcadeHalls;
         }
+        public async Task<bool> DeleteById(string endpoint, int id)
+        {
+            HttpResponseMessage response = await _httpClient.DeleteAsync($"{endpoint}{id}");
+            return response.IsSuccessStatusCode;
+        }
 
         public async Task<T?> GetApiById<T>(int id)
         {
