@@ -1,6 +1,7 @@
 ﻿using Hall_App.Models;
 using System;
 using System.Text.Json;
+using static System.Net.WebRequestMethods;
 
 namespace Hall_App.Service
 {
@@ -30,14 +31,13 @@ namespace Hall_App.Service
         }
         public async Task<List<ArcadeHall>?> GetAll()
         {
-            // Anropa den generiska metoden och specificera typparametern som List<ArcadeHall>
-            List<ArcadeHall> arcadeHalls = await GetAllFromApi<ArcadeHall>("https://localhost:7234/api/ArcadeHall");
+            List<ArcadeHall>? arcadeHalls = await GetAllFromApi<ArcadeHall>("https://localhost:7234/api/ArcadeHall");
 
-            // Returnera resultatet
+
             return arcadeHalls;
         }
 
-        public async Task<T?> GetById<T>(int id)
+        public async Task<T?> GetApiById<T>(int id)
         {
             HttpResponseMessage response = await _httpClient.GetAsync($"https://localhost:7234/api/ArcadeHall/{id}");
             if (!response.IsSuccessStatusCode)
@@ -48,6 +48,11 @@ namespace Hall_App.Service
             string json = await response.Content.ReadAsStringAsync();
 
             return JsonSerializer.Deserialize<T>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
+        public async Task<ArcadeHall?> GetById(int id)
+        {
+            ArcadeHall? arcadeHall = await GetApiById<ArcadeHall>(id);
+            return arcadeHall;
         }
 
     }

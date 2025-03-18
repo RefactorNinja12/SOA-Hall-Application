@@ -6,6 +6,7 @@ namespace Hall_App.Service
     {
         Task<List<ArcadeHall>?> GetAll();
         Task<List<T>?> GetAllFromApi<T>(string endpoint);
-        Task<T?> GetById<T>(int id);
+        Task<T?> GetApiById<T>(int id);
+        Task<ArcadeHall?> GetById(int id);
     }
 }

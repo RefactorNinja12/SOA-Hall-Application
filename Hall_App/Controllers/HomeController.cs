@@ -14,14 +14,14 @@ namespace Hall_App.Controllers
         }
         public async Task<IActionResult> Index()
         {
-           
+            ArcadeHall arcadeHall = await _apiService.GetById(1);
             return View();
         }
 
         public async Task<IActionResult> Arcadehalls()
         {
-            List<ArcadeHall> arcadeHalls =await _apiService.GetAll(); 
-            return View(arcadeHalls);
+             
+            return View();
         }
 
     }
