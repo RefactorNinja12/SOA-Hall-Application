@@ -15,7 +15,6 @@ namespace Hall_App.Controllers
         public async Task<IActionResult> Index()
         {
             
-            
             return View();
         }
 
@@ -71,6 +70,19 @@ namespace Hall_App.Controllers
                 return RedirectToAction("ArcadeHalls");
             }
             return RedirectToAction("Edit");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+          if (id <= 0)
+            {
+                return RedirectToAction("Home", "Arcadehalls");
+            }
+
+            bool isDeleted = await _apiService.DeleteById("https://localhost:7234/api/ArcadeHall/", id);
+
+            return RedirectToAction("ArcadeHalls");
         }
 
     }
