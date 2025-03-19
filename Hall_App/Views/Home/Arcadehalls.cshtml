@@ -23,14 +23,15 @@
                     <td>@hall.Id</td>
                     <td>@hall.Name</td>
                     <td>@hall.Genre</td>
-                    <td><a href="@Url.Action("CreateArcadeHalls", "Home")" class="btn-boka">Update</a><a href="@Url.Action("Edit", "Home", new { id = hall.Id })" class="btn-boka">Delete</a></td>
-                   
+                    <td><a href="@Url.Action("CreateArcadeHalls", "Home")" class="btn-boka">Create</a>
+                        <a href="@Url.Action("Edit", "Home", new { id = hall.Id })" class="btn-boka">Update</a>
+                        <form class="DeleteForm" asp-controller="Home" asp-action="Delete" method="post">
+                        <input type="hidden" name="id" value="@hall.Id"/>
+                        <input type="submit" value="Delete" class="btn-boka"/>
+                        </form>
+                    </td>
                 </tr>
             }
-
-
-
-
         </tbody>
     </table>
 </div>
