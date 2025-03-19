@@ -180,3 +180,24 @@ main {
         .hero-buttons .btn-boka:hover {
             background-color: #D1A0E4;
         }
+table {
+    width: 60%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+    padding: 15px
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+.arcade-overview-container{
+    display: flex; 
+    flex-direction:column;
+    justify-content: center; 
+    align-items: center; 
+}
+

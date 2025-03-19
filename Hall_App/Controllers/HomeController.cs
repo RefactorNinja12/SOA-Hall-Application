@@ -21,23 +21,56 @@ namespace Hall_App.Controllers
 
         public async Task<IActionResult> Arcadehalls()
         {
-            ArcadeHall arcadeHall = new ArcadeHall()
-            {
-                Genre = "IT takes 2",
-                Name = "Shoooter hall",
-                ImageUrl = "Example of something",
-                Id = 3
-            };
-            bool isUpdated = await _apiService.UpdateByApi("https://localhost:7234/api/ArcadeHall/", arcadeHall, arcadeHall.Id);
-            if (isUpdated)
-            {
-                Console.WriteLine("Updatering succeed");
-            }
-            else
-            {
-                Console.WriteLine("Something went wrong");
-            }
+            List<ArcadeHall>? arcadeHalls = await _apiService.GetAllArcadeHalls();
+            return View(arcadeHalls);
+        }
+       
+        public IActionResult CreateArcadeHalls()
+        {
             return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateArcadeHalls(ArcadeHall arcadeHall)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("CreateArcadeHalls");
+            }
+            bool isCreated = await _apiService.CreatebyApi<ArcadeHall>("https://localhost:7234/api/ArcadeHall", arcadeHall);
+            if (isCreated)
+            {
+                return RedirectToAction("ArcadeHalls");
+            }
+            
+            return RedirectToAction("CreateArcadeHalls");
+        }
+    
+        public async Task<IActionResult> Edit(int? id)
+        {
+            var arcadeHall = new ArcadeHall();
+            if (id.HasValue)
+            {
+                arcadeHall.Id = id.Value;
+            }
+            return View(arcadeHall);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(ArcadeHall arcadeHall)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Edit");
+            }
+            if(arcadeHall.Id <= 0)
+            {
+                return RedirectToAction("Edit");
+            }
+            bool IsUpated = await _apiService.UpdateByApi<ArcadeHall>("https://localhost:7234/api/ArcadeHall/", arcadeHall, arcadeHall.Id);
+            if (IsUpated)
+            {
+                return RedirectToAction("ArcadeHalls");
+            }
+            return RedirectToAction("Edit");
         }
 
     }
