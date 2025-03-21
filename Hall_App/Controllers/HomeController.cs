@@ -23,7 +23,13 @@ namespace Hall_App.Controllers
             List<ArcadeHall>? arcadeHalls = await _apiService.GetAllArcadeHalls();
             return View(arcadeHalls);
         }
-       
+
+        public async Task<IActionResult> Admin()
+        {
+            List<ArcadeHall>? arcadeHalls = await _apiService.GetAllArcadeHalls();
+            return View(arcadeHalls);
+        }
+
         public IActionResult CreateArcadeHalls()
         {
             return View();
@@ -80,9 +86,9 @@ namespace Hall_App.Controllers
                 return RedirectToAction("Home", "Arcadehalls");
             }
 
-            bool isDeleted = await _apiService.DeleteById("https://localhost:7234/api/ArcadeHall/", id);
+            bool isDeleted = await _apiService.DeleteById("https://informatik6.ei.hv.se//arcadehallapi/api/ArcadeHall/", id);
 
-            return RedirectToAction("ArcadeHalls");
+            return RedirectToAction("Admin");
         }
 
     }
