@@ -41,7 +41,7 @@ namespace Hall_App.Controllers
             {
                 return RedirectToAction("CreateArcadeHalls");
             }
-            bool isCreated = await _apiService.CreatebyApi<ArcadeHall>("https://informatik6.ei.hv.se//arcadehallapi/api/ArcadeHall/", arcadeHall);
+            bool isCreated = await _apiService.CreatebyApi<ArcadeHall>("https://localhost:7234/api/ArcadeHall", arcadeHall);
             if (isCreated)
             {
                 return RedirectToAction("ArcadeHalls");
@@ -70,7 +70,7 @@ namespace Hall_App.Controllers
             {
                 return RedirectToAction("Edit");
             }
-            bool IsUpated = await _apiService.UpdateByApi<ArcadeHall>("https://informatik6.ei.hv.se//arcadehallapi/api/ArcadeHall/", arcadeHall, arcadeHall.Id);
+            bool IsUpated = await _apiService.UpdateByApi<ArcadeHall>("https://localhost:7234/api/ArcadeHall", arcadeHall, arcadeHall.Id);
             if (IsUpated)
             {
                 return RedirectToAction("ArcadeHalls");
@@ -86,7 +86,7 @@ namespace Hall_App.Controllers
                 return RedirectToAction("Home", "Arcadehalls");
             }
 
-            bool isDeleted = await _apiService.DeleteById("https://informatik6.ei.hv.se//arcadehallapi/api/ArcadeHall/", id);
+            bool isDeleted = await _apiService.DeleteById("https://localhost:7234/api/ArcadeHall/", id);
 
             return RedirectToAction("Admin");
         }
