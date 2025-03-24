@@ -7,20 +7,30 @@
 
 <div class="halls-content">
     <div class="our-halls-content">
-        <div class="halls-img"></div>
+        <div class="halls-img"><img src="/images/hallheader.jpg" alt="Header Photo" /></div>
         <div class="halls-description">
-            <p>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</p>
+            <p>Välkommen till våra unika spelhallar! Här hittar du en värld fylld av spännande utmaningar,
+                interaktiva upplevelser och adrenalinfyllda äventyr. Oavsett om du är ute efter ett episkt lagspel,
+                en hjärnvrickande escape room-upplevelse eller en familjevänlig aktivitet, har vi något för dig.
+                Våra hallar är designade för att ge dig den ultimata spelupplevelsen - full av action, mysterium och roliga
+                överraskningar. Är du redo att anta utmaningen?
+            </p>
         </div>
     </div>
     <div class="card-container">
         @foreach (var halls in Model)
         {
             <div class="card-content">
-                <div class="card-img">@halls.ImageUrl</div>
-              <div class="card-description">
-                <h3>@halls.Name</h3>
-                <p>@halls.Genre</p>
-              </div>
+                <div class="card-img"><img src="@halls.ImageUrl" alt="Category photo" /></div>
+                <div class="card-description">
+                    <h3>@halls.Name</h3>
+                    <p>@halls.Description</p>
+                    <p>Genre: @halls.Genre</p>
+                    <p>Max capacity: @halls.MaxCapacity people</p>
+                    <p>Status: @halls.HallStatus</p>
+                    <p>Location: @halls.Location</p>
+
+                </div>
             </div>
         }
     </div>

@@ -23,7 +23,7 @@
                         <td>@hall.Id</td>
                         <td>@hall.Name</td>
                         <td>@hall.Genre</td>
-                        <td><a href="@Url.Action("CreateArcadeHalls", "Home")" class="btn-boka">Create</a>
+                    <td><a href="@Url.Action("CreateArcadeHalls", "Home")" class="btn-boka">Create</a>
                             <a href="@Url.Action("Edit", "Home", new { id = hall.Id })" class="btn-boka">Update</a>
                             <form class="DeleteForm" asp-controller="Home" asp-action="Delete" method="post">
                             <input type="hidden" name="id" value="@hall.Id"/>
@@ -33,5 +33,5 @@
                     </tr>
 }
         </tbody>
-    </table>
+    </table> 
 </div>
