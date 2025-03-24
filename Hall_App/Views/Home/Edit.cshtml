@@ -7,16 +7,30 @@
 
 <form asp-action="Edit" method="post" class="form-container">
         
-        <input asp-for="Id" class="form-input" type="hidden" />
-        <label asp-for="Name" class="form-label"></label>
-        <input asp-for="Name" class="form-input" />
-    
-        <label asp-for="Genre" class="form-label"></label>
-        <input asp-for="Genre" class="form-input" />
-     
+   <input asp-for="Id" class="form-input" type="hidden" />
+       
 
-        <label asp-for="ImageUrl" class="form-label"></label>
-        <input asp-for="ImageUrl" class="form-input" />
+    <label asp-for="Name" class="form-label"></label>
+    <input asp-for="Name" class="form-input" />
+
+    <label asp-for="Genre" class="form-label"></label>
+    <input asp-for="Genre" class="form-input" />
+
+
+    <label asp-for="ImageURL" class="form-label"></label>
+    <input asp-for="ImageURL" class="form-input" />
+
+    <label asp-for="Description" class="form-label"></label>
+    <input asp-for="Description" class="form-input" />
+
+    <label asp-for="Location" class="form-label"></label>
+    <input asp-for="Location" class="form-input" />
+
+    <label asp-for="MaxCapacity" class="form-label"></label>
+    <input asp-for="MaxCapacity" class="form-input" />
+
+    <label asp-for="HallStatus" class="form-label"></label>
+    <input asp-for="HallStatus" class="form-input" />
 
     <button type="submit" class="form-button">
         Submit
