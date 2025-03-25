@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Hall_App.Models;
 using Hall_App.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hall_App.Controllers
@@ -28,13 +29,14 @@ namespace Hall_App.Controllers
         {
             return View();
         }
-
+        [Authorize]
         public async Task<IActionResult> Admin()
         {
             List<ArcadeHall>? arcadeHalls = await _apiService.GetAllArcadeHalls();
             return View(arcadeHalls);
         }
 
+        [Authorize]
         public IActionResult CreateArcadeHalls()
         {
             return View();
@@ -49,12 +51,12 @@ namespace Hall_App.Controllers
             bool isCreated = await _apiService.CreatebyApi<ArcadeHall>("https://localhost:7234/api/ArcadeHall", arcadeHall);
             if (isCreated)
             {
-                return RedirectToAction("ArcadeHalls");
+                return RedirectToAction("Admin");
             }
             
             return RedirectToAction("CreateArcadeHalls");
         }
-    
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             var arcadeHall = new ArcadeHall();
@@ -82,7 +84,7 @@ namespace Hall_App.Controllers
             }
             return RedirectToAction("Edit");
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {

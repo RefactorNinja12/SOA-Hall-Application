@@ -6,6 +6,11 @@
     background: linear-gradient(to right, rgb(191, 45, 100), rgb(162, 50, 114), rgb(132, 55, 129));
     font-family: 'Press Start 2P', cursive;
 }
+.wrapper{
+    display:flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
 main {
     flex-grow: 1;
@@ -84,9 +89,6 @@ main {
 }
 
 .footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
     width: 100%;
     background-color: #2e1041;
     color: white;
@@ -334,12 +336,12 @@ th, td {
     text-align: center;
 }
 
-.card-content:hover {
-    transform: translateY(-5px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0px 4px 15px rbga(0, 0, 0, 0.3);
-    cursor: pointer;
-}
+    .card-content:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 0 11px rgba(33,33,33,.2);
+        cursor: pointer;
+    }
 
 .card-img img {
     width: 100%;
@@ -367,14 +369,23 @@ th, td {
 }
 
 .account-block {
-    padding: 0;
-    background-image: url(https://bootdey.com/img/Content/bg1.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100%;
     position: relative;
+    background: url(/images/hallheader.jpg) no-repeat center;
+    background-size: cover;
+    border-top-right-radius: 5px; /* Justera radien efter behov */
+    border-bottom-right-radius: 5px;
+    height: 100%;
 }
-
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
     .account-block .overlay {
         -webkit-box-flex: 1;
         -ms-flex: 1;
@@ -385,6 +396,7 @@ th, td {
         left: 0;
         right: 0;
         background-color: rgba(0, 0, 0, 0.4);
+        overflow: hidden;
     }
 
     .account-block .account-testimonial {
@@ -407,6 +419,5 @@ th, td {
     border-color: #5369f8;
     color: #fff;
 }
-
 
 
