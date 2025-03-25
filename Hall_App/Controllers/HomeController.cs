@@ -24,6 +24,11 @@ namespace Hall_App.Controllers
             return View(arcadeHalls);
         }
 
+        public IActionResult Login()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> Admin()
         {
             List<ArcadeHall>? arcadeHalls = await _apiService.GetAllArcadeHalls();
