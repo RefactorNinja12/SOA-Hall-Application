@@ -45,7 +45,7 @@ namespace Hall_App.Service
 
         public async Task<T?> GetApiById<T>(int id)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"https://localhost:7234/api/ArcadeHall{ id}");
+            HttpResponseMessage response = await _httpClient.GetAsync($"https://localhost:7234/api/ArcadeHall/{id}");
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"Error: {response.StatusCode}");
