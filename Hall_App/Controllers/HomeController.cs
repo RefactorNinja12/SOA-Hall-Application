@@ -59,18 +59,10 @@ namespace Hall_App.Controllers
             return RedirectToAction("CreateArcadeHalls");
         }
        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            //var arcadeHall = new ArcadeHall();
-
-            List<ArcadeHall>? arcadeHalls = await _apiService.GetAllArcadeHalls();
-
-            var arcadeHall = arcadeHalls.FirstOrDefault(x => x.Id == id.Value);
-            if (id.HasValue)
-            {
-                arcadeHall.Id = id.Value;
-            }
-            return View(arcadeHall);
+            ArcadeHall? arcadehall = await _apiService.GetArcadeHallById(id);
+            return View(arcadehall);
         }
         [HttpPost]
         public async Task<IActionResult> Edit(ArcadeHall arcadeHall)
