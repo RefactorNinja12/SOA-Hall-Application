@@ -383,7 +383,7 @@ th, td {
     position: relative;
     background: url(/images/hallheader.jpg) no-repeat center;
     background-size: cover;
-    border-top-right-radius: 5px; /* Justera radien efter behov */
+    border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     height: 100%;
 }
