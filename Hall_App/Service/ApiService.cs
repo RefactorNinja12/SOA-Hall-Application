@@ -32,7 +32,7 @@ namespace Hall_App.Service
         }
         public async Task<List<ArcadeHall>?> GetAllArcadeHalls()
         {
-            List<ArcadeHall>? arcadeHalls = await GetAllFromApi<ArcadeHall>("https://informatik6.ei.hv.se/arcadehallapi/api/ArcadeHall");
+            List<ArcadeHall>? arcadeHalls = await GetAllFromApi<ArcadeHall>("https://localhost:7234/api/ArcadeHall");
 
 
             return arcadeHalls;
@@ -45,7 +45,7 @@ namespace Hall_App.Service
 
         public async Task<T?> GetApiById<T>(int id)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync($"https://informatik6.ei.hv.se/arcadehallapi/api/ArcadeHall{ id}");
+            HttpResponseMessage response = await _httpClient.GetAsync($"https://localhost:7234/api/ArcadeHall{ id}");
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine($"Error: {response.StatusCode}");

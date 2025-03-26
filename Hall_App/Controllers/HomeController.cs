@@ -1,6 +1,10 @@
 using System.Diagnostics;
+using System.Security.Claims;
+using Hall_App.Dto;
 using Hall_App.Models;
 using Hall_App.Service;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,9 +13,11 @@ namespace Hall_App.Controllers
     public class HomeController : Controller
     {
         private readonly IApiService _apiService;
-        public HomeController(IApiService apiService)
+        private readonly ILoginService _loginService;
+        public HomeController(IApiService apiService, ILoginService loginService)
         {
             _apiService = apiService;
+            _loginService = loginService;
         }
         public async Task<IActionResult> Index()
         {
@@ -24,19 +30,15 @@ namespace Hall_App.Controllers
             List<ArcadeHall>? arcadeHalls = await _apiService.GetAllArcadeHalls();
             return View(arcadeHalls);
         }
-
-        public IActionResult Login()
-        {
-            return View();
-        }
-        [Authorize]
+        
+      //  [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Admin()
         {
             List<ArcadeHall>? arcadeHalls = await _apiService.GetAllArcadeHalls();
             return View(arcadeHalls);
         }
 
-        [Authorize]
+     //   [Authorize(Roles = "Admin")]
         public IActionResult CreateArcadeHalls()
         {
             return View();
@@ -56,7 +58,7 @@ namespace Hall_App.Controllers
             
             return RedirectToAction("CreateArcadeHalls");
         }
-        [Authorize]
+   //     [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             var arcadeHall = new ArcadeHall();
@@ -84,7 +86,7 @@ namespace Hall_App.Controllers
             }
             return RedirectToAction("Edit");
         }
-        [Authorize]
+       // [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -93,10 +95,36 @@ namespace Hall_App.Controllers
                 return RedirectToAction("Home", "Arcadehalls");
             }
 
-            bool isDeleted = await _apiService.DeleteById("https://localhost:7234/api/ArcadeHall/", id);
+            bool isDeleted = await _apiService.DeleteById("https://localhost:7234/api/ArcadeHall", id);
 
             return RedirectToAction("Admin");
         }
+        #region Login
+        public IActionResult Login()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(UserDto userDto)
+        {
+            if (_loginService.ValidateUser(userDto))
+            {
+                var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Email, userDto.Email),
+                        new Claim(ClaimTypes.Role, "Admin"),
+                    };
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
+                return RedirectToAction("Admin");
+            }
+
+            return Unauthorized();
+        }
+        #endregion
 
     }
 }

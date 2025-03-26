@@ -6,8 +6,17 @@
     background: linear-gradient(to right, rgb(191, 45, 100), rgb(162, 50, 114), rgb(132, 55, 129));
     font-family: 'Press Start 2P', cursive;
 }
-.wrapper{
-    display:flex;
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.content{
+    flex: 1; 
+}
+
+.wrapper {
+    display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
@@ -22,13 +31,14 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0px 20px;
 }
 
 .navbar-loggo {
     text-decoration: none;
     font-size: 1.5rem;
     color: white;
+    margin-left: 20px; 
 }
 
 .nav-buttons {
@@ -86,6 +96,7 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-right: 20px;
 }
 
 .footer {
@@ -323,7 +334,7 @@ th, td {
 
 .card-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 50px;
     justify-content: center;
 }

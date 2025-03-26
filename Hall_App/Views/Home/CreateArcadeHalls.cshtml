@@ -5,32 +5,66 @@
 @{
 }
 
-<form asp-action="CreateArcadeHalls" method="post" class="form-container">
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-black text-white p-4">
+            <h3 class="mb-0">Create Arcade Hall</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="CreateArcadeHalls" method="post">
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label fw-bold"></label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter hall name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
 
-    <label asp-for="Name" class="form-label"></label>
-    <input asp-for="Name" class="form-input" />
+                <div class="mb-3">
+                    <label asp-for="Genre" class="form-label fw-bold"></label>
+                    <input asp-for="Genre" class="form-control" placeholder="Enter genre" />
+                    <span asp-validation-for="Genre" class="text-danger"></span>
+                </div>
 
-    <label asp-for="Genre" class="form-label"></label>
-    <input asp-for="Genre" class="form-input" />
+                <div class="mb-3">
+                    <label asp-for="ImageURL" class="form-label fw-bold"></label>
+                    <input asp-for="ImageURL" class="form-control" placeholder="Enter image URL" />
+                    <span asp-validation-for="ImageURL" class="text-danger"></span>
+                </div>
 
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label fw-bold"></label>
+                    <textarea asp-for="Description" class="form-control" rows="3" placeholder="Enter description"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
 
-    <label asp-for="ImageURL" class="form-label"></label>
-    <input asp-for="ImageURL" class="form-input" />
+                <div class="mb-3">
+                    <label asp-for="Location" class="form-label fw-bold"></label>
+                    <input asp-for="Location" class="form-control" placeholder="Enter location" />
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                </div>
 
-    <label asp-for="Description" class="form-label"></label>
-    <input asp-for="Description" class="form-input" />
+                <div class="mb-3">
+                    <label asp-for="MaxCapacity" class="form-label fw-bold"></label>
+                    <input asp-for="MaxCapacity" class="form-control" type="number" placeholder="Enter max capacity" />
+                    <span asp-validation-for="MaxCapacity" class="text-danger"></span>
+                </div>
 
-    <label asp-for="Location" class="form-label"></label>
-    <input asp-for="Location" class="form-input" />
+                <div class="mb-3">
+                    <label asp-for="HallStatus" class="form-label fw-bold"></label>
+                    <select asp-for="HallStatus" class="form-select">
+                        <option value="Open">Open</option>
+                        <option value="Closed">Closed</option>
+                        <option value="Under Maintenance">Under Maintenance</option>
+                        <option value="Under Maintenance">SpecialEvent</option>
+                        <option value="Under Maintenance">Reserved</option>
+                    </select>
+                    <span asp-validation-for="HallStatus" class="text-danger"></span>
+                </div>
 
-    <label asp-for="MaxCapacity" class="form-label"></label>
-    <input asp-for="MaxCapacity" class="form-input" />
-
-    <label asp-for="HallStatus" class="form-label"></label>
-    <input asp-for="HallStatus" class="form-input" />
-
-
-    <button type="submit" class="form-button">
-        Submit
-    </button>
-</form>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-dark">Create</button>
+                    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
