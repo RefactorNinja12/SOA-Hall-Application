@@ -61,7 +61,11 @@ namespace Hall_App.Controllers
        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
-            var arcadeHall = new ArcadeHall();
+            //var arcadeHall = new ArcadeHall();
+
+            List<ArcadeHall>? arcadeHalls = await _apiService.GetAllArcadeHalls();
+
+            var arcadeHall = arcadeHalls.FirstOrDefault(x => x.Id == id.Value);
             if (id.HasValue)
             {
                 arcadeHall.Id = id.Value;
@@ -95,8 +99,8 @@ namespace Hall_App.Controllers
                 return RedirectToAction("Home", "Arcadehalls");
             }
 
-            bool isDeleted = await _apiService.DeleteById("https://localhost:7234/api/ArcadeHall", id);
-
+            bool isDeleted = await _apiService.DeleteById("https://localhost:7234/api/ArcadeHall/", id);
+            
             return RedirectToAction("Admin");
         }
         #region Login
