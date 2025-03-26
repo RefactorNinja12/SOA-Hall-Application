@@ -31,14 +31,14 @@ namespace Hall_App.Controllers
             return View(arcadeHalls);
         }
         
-      //  [Authorize(Roles ="Admin")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Admin()
         {
             List<ArcadeHall>? arcadeHalls = await _apiService.GetAllArcadeHalls();
             return View(arcadeHalls);
         }
 
-     //   [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateArcadeHalls()
         {
             return View();
@@ -58,7 +58,7 @@ namespace Hall_App.Controllers
             
             return RedirectToAction("CreateArcadeHalls");
         }
-   //     [Authorize(Roles = "Admin")]
+       [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             var arcadeHall = new ArcadeHall();
@@ -86,7 +86,7 @@ namespace Hall_App.Controllers
             }
             return RedirectToAction("Edit");
         }
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -122,7 +122,13 @@ namespace Hall_App.Controllers
                 return RedirectToAction("Admin");
             }
 
-            return Unauthorized();
+            return RedirectToAction("Login");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Arcadehalls");
         }
         #endregion
 

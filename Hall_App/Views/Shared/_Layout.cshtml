@@ -34,7 +34,10 @@
                         <a class="btn-boka" href="#">Boka</a>
                         @if (User.Identity?.IsAuthenticated == true){
 
-                        <a class="btn-boka" href="#">Logga ut</a>
+                            <form class="logout-form"  asp-action="Logout" method="post">
+
+                                <div class="outer-button-container"><button class="btn-boka" type="submit">Logga ut</button></div>
+                            </form>
                         }
                         <div class="menu-container">
                             <label for="menu-toggle" class="menu-button">☰</label>
