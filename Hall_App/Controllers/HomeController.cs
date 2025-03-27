@@ -75,7 +75,7 @@ namespace Hall_App.Controllers
             {
                 return RedirectToAction("Edit");
             }
-            bool IsUpated = await _apiService.UpdateByApi<ArcadeHall>("https://localhost:7234/api/ArcadeHall", arcadeHall, arcadeHall.Id);
+            bool IsUpated = await _apiService.UpdateByApi<ArcadeHall>("https://localhost:7234/api/ArcadeHall/", arcadeHall, arcadeHall.Id);
             if (IsUpated)
             {
                 return RedirectToAction("ArcadeHalls");
